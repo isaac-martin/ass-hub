@@ -10,6 +10,7 @@ require_once( trailingslashit( get_stylesheet_directory() ) . 'functions-config-
 // An example of how to manage loading front-end assets (scripts, styles, and fonts)
 require_once( trailingslashit( get_stylesheet_directory() ) . 'inc/assets.php' );
 
+
 // Required to demonstrate WP AJAX Page Loader (as WordPress doesn't ship with even simple post navigation functions)
 require_once( trailingslashit( get_stylesheet_directory() ) . 'inc/navigation.php' );
 

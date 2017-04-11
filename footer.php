@@ -1,4 +1,4 @@
-      </div>
+
       <div id="wrap-footer" class="wrap-footer">
         <footer id="colophon" class="site-footer">
           <nav id="site-footer-navigation">
