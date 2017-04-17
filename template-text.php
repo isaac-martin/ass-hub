@@ -1,11 +1,7 @@
 <?php /* Template Name: Text Page */ get_header(); ?>
-  <div id="wrap-content" class="wrap-content">
-    <div id="content" class="site-content">
-      <section id="primary" class="content-area">
-        <main id="main" class="site-main">
-               <?php the_content(); ?>
-        </main>
-      </section>
-    </div>
-  </div>
+<main class="site-main">
+  <section class="container">
+    <?php the_content(); ?>
+  </section>
+</main>
 <?php get_footer(); ?>
