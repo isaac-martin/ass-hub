@@ -8,7 +8,7 @@
       <span class="bold">Email:</span> <br /><a href="mailto:assessments@assessmenthub.com.au">assessments@assessmenthub.com.au</a>
     </p>
 
-    <form class="grey-form contact-form">
+    <form class="grey-form contact-form" id="contact" method="post" action>
       <div class="grid">
       <div class="col">
         <input type="text" name="firstname" placeholder="Name">
@@ -21,6 +21,7 @@
     </div>
       <input type="submit" class="btn btn--inverse center" value="Enquire" placeholder="Message">
     </form>
+    <div id="contact-message"></div>
   </section>
 
   <section class="team full-w green-bg">
@@ -33,6 +34,7 @@
         <input type="text" name="number" placeholder="Phone Number">
         <input type="submit" class="btn btn--inverse center" value="Enquire">
       </form>
+      <div id="join-message"></div>
     </div>
   </section>
 
