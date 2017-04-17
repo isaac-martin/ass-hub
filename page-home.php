@@ -67,7 +67,7 @@ You receive a more current, reliable, expert report. Expedite your decision maki
       <input type="text" name="phone" placeholder="Phone Number">
       <input type="submit" class="btn btn--inverse center" value="Enquire">
     </form>
-    <div id="form-message"></div>
+    <div id="join-message"></div>
   </div>
 </section>
 </main>
