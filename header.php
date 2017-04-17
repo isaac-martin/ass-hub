@@ -19,7 +19,7 @@
         <div class="site-branding">
           <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><img class="logo" src="<?php echo get_template_directory_uri(); ?>/imgs/green_logo.svg"></a></h1>
         </div>
-        <button id="responsive-menu-toggle"><?php _e( 'Menu', 'asshub' ); ?></button>
+        <button id="responsive-menu-toggle"><span></span><span></span><span></span></button>
         <nav id="site-navigation" class="site-navigation">
           <div id="responsive-menu"><?php wp_nav_menu( array( 'theme_location' => 'header', 'menu_id' => 'menu-header', 'menu_class' => 'menu-inline' ) ); ?></div>
         </nav>

@@ -10,12 +10,12 @@
 
     <form class="grey-form contact-form" id="contact" method="post" action>
       <div class="grid">
-      <div class="col">
-        <input type="text" name="firstname" placeholder="Name">
+      <div class="col-6_sm-12">
+        <input type="text" name="name" placeholder="Name">
         <input type="text" name="email" placeholder="Email">
-        <input type="text" name="number" placeholder="Phone Number">
+        <input type="text" name="phone" placeholder="Phone Number">
       </div>
-      <div class="col">
+      <div class="col-6_sm-12">
         <textarea name="message">Message</textarea>
       </div>
     </div>
