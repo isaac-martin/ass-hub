@@ -213,26 +213,26 @@ else{ ?>
 			<section id="primary" class="content-area">
 				<main id="main" class="site-main">
 					<section class="container">
-						<h2>Booking Form</h2>
+						<h2 class="underline">Booking Form</h2>
 						<form name="bookingForm" method="post" action="">
 							<input type="hidden" name="authToken" value="9f8e764bae7327a2c270546260004909">
 							<ul class="oscFList">
 								<li>
-									<h3>Assess Function &amp; Capacity</h3>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Activities of Daily Living (ADL)">Activities of Daily Living (ADL)</label>
-							<label class="checkbox-wrap"><input type="checkbox" name="function" value="Care, Domestic & Personal (CARE)">Care, Domestic & Personal (CARE)</label>
-							<label class="checkbox-wrap"><input type="checkbox" name="function" value="Function Capacity Evaluation (FCE)">Function Capacity Evaluation (FCE)</label>
-			<label class="checkbox-wrap"><input type="checkbox" name="function" value="Earning Capacity (EC)">Earning Capacity (EC)</label>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Labour Market Analysis (LMA)">Labour Market Analysis (LMA)</label>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Employability (VOC+FCE)">Employability (VOC+FCE)</label>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Vocational (VOC)">Vocational (VOC)</label>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="File Review (FR)">File Review (FR)</label>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Work Related Activity Program (WRAP)">Work Related Activity Program (WRAP)</label>
+									<h4>Assess Function &amp; Capacity</h4>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Activities of Daily Living (ADL)" />Activities of Daily Living (ADL)</label>
+							<label class="checkbox-wrap"><input type="checkbox" name="function" value="Care, Domestic & Personal (CARE)" />Care, Domestic & Personal (CARE)</label>
+							<label class="checkbox-wrap"><input type="checkbox" name="function" value="Function Capacity Evaluation (FCE)" />Function Capacity Evaluation (FCE)</label>
+			<label class="checkbox-wrap"><input type="checkbox" name="function" value="Earning Capacity (EC)" />Earning Capacity (EC)</label>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Labour Market Analysis (LMA)" />Labour Market Analysis (LMA)</label>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Employability (VOC+FCE)" />Employability (VOC+FCE)</label>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Vocational (VOC)" />Vocational (VOC)</label>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="File Review (FR)" />File Review (FR)</label>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Work Related Activity Program (WRAP)" />Work Related Activity Program (WRAP)</label>
 								</li>
 								<li>
-										<h3>Impairment</h3>
-										<input type="checkbox" name="impairment" value="Whole Person Impairment (WPI) - Psychological">Whole Person Impairment (WPI) - Psychological</option>
-										<input type="checkbox" name="impairment" value="Whole Person Impairment (WPI) - Physical">Whole Person Impairment (WPI) - Physical</option>
+										<h4>Impairment</h4>
+										<label class="checkbox-wrap"><input type="checkbox" name="impairment" value="Whole Person Impairment (WPI) - Psychological"/>Whole Person Impairment (WPI) - Psychological</label>
+										<label class="checkbox-wrap"><input type="checkbox" name="impairment" value="Whole Person Impairment (WPI) - Physical"/>Whole Person Impairment (WPI) - Physical</label>
 								</li>
 								<li>
 									<label for="assessmentPurposeCategory">Assessment Purpose Category</label>

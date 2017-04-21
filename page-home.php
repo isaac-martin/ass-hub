@@ -10,7 +10,7 @@
 <section class="how-it-works container">
   <div class="grid">
     <div class="col-12">
-          <h2 class="center"><span class="underline">How it Works?</span></h2>
+          <h2><span class="underline">How it Works?</span></h2>
     </div>
 
     <?php if( have_rows('how_it_works') ):
