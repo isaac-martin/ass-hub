@@ -398,6 +398,10 @@ else{ ?>
 									<label for="reportRequiredNoLaterThan">Report Required No Later Than <label class="red">*</label></label>
 									<input type="text" id="reportRequiredNoLaterThan" name="reportRequiredNoLaterThan" class="datepicker"  value="" required>
 								</li>
+								<li>
+									<label for="comments">Any other Comments?</label>
+									<input type="text" id="comments" name="comments" value="">
+								</li>
 
 
 							</ul>
