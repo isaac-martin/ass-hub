@@ -1,5 +1,8 @@
 <?php get_header(); ?>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
 <?php
 if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 	require_once( ABSPATH . 'wp-content/themes/ass-hub/assets/mycurl.php' );
@@ -215,18 +218,21 @@ else{ ?>
 							<input type="hidden" name="authToken" value="9f8e764bae7327a2c270546260004909">
 							<ul class="oscFList">
 								<li>
-									<label for="assessCategory"> Assess Category</label>
-									<select id="assessCategory" name="assessCategory">
-										<option value=""> Please Select </option>
-										<option value="FUNCTION & CAPACITY">FUNCTION & CAPACITY</option>
-										<option value="IMPAIRMENT">IMPAIRMENT</option>
-									</select>
+									<h3>Assess Function &amp; Capacity</h3>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Activities of Daily Living (ADL)">Activities of Daily Living (ADL)</label>
+							<label class="checkbox-wrap"><input type="checkbox" name="function" value="Care, Domestic & Personal (CARE)">Care, Domestic & Personal (CARE)</label>
+							<label class="checkbox-wrap"><input type="checkbox" name="function" value="Function Capacity Evaluation (FCE)">Function Capacity Evaluation (FCE)</label>
+			<label class="checkbox-wrap"><input type="checkbox" name="function" value="Earning Capacity (EC)">Earning Capacity (EC)</label>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Labour Market Analysis (LMA)">Labour Market Analysis (LMA)</label>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Employability (VOC+FCE)">Employability (VOC+FCE)</label>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Vocational (VOC)">Vocational (VOC)</label>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="File Review (FR)">File Review (FR)</label>
+									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Work Related Activity Program (WRAP)">Work Related Activity Program (WRAP)</label>
 								</li>
 								<li>
-									<label for="assess">Assess</label>
-									<select id="assess" name="assess[]" multiple size="3">
-										<option value=""> Please Select </option>
-									</select>
+										<h3>Impairment</h3>
+										<input type="checkbox" name="impairment" value="Whole Person Impairment (WPI) - Psychological">Whole Person Impairment (WPI) - Psychological</option>
+										<input type="checkbox" name="impairment" value="Whole Person Impairment (WPI) - Physical">Whole Person Impairment (WPI) - Physical</option>
 								</li>
 								<li>
 									<label for="assessmentPurposeCategory">Assessment Purpose Category</label>
@@ -245,32 +251,32 @@ else{ ?>
 								</li>
 								<li><h4>Your Details</h4></li>
 								<li>
-									<label for="company">Company <span class="red">*</span></label>
+									<label for="company">Company <label class="red">*</label></label>
 									<input type="text" id="company" name="company" value="" required>
 								</li>
 								<li>
-									<label for="firstName">First Name <span class="red">*</span></label>
+									<label for="firstName">First Name <label class="red">*</label></label>
 									<input type="text" id="firstName" name="firstName" value="" required>
 								</li>
 								<li>
-									<label for="lastName">Last Name <span class="red">*</span></label>
+									<label for="lastName">Last Name <label class="red">*</label></label>
 									<input type="text" id="lastName" name="lastName" value="" required>
 								</li>
 								<li>
-									<label for="email">Email <span class="red">*</span></label>
+									<label for="email">Email <label class="red">*</label></label>
 									<input type="email" id="email" name="email" value="" required>
 								</li>
 								<li>
-									<label for="phone">Phone <span class="red">*</span></label>
+									<label for="phone">Phone <label class="red">*</label></label>
 									<input type="number" id="phone" name="phone" value="" required>
 								</li>
 								<li><h4>Your Client - Injured Person Details</h4></li>
 								<li>
-									<label for="ipfirstName">First Name <span class="red">*</span></label>
+									<label for="ipfirstName">First Name <label class="red">*</label></label>
 									<input type="text" id="ipfirstName" name="ipfirstName" value="" required>
 								</li>
 								<li>
-									<label for="iplastName">Last Name <span class="red">*</span></label>
+									<label for="iplastName">Last Name <label class="red">*</label></label>
 									<input type="text" id="iplastName" name="iplastName" value="" required>
 								</li>
 								<li>
@@ -278,20 +284,20 @@ else{ ?>
 									<input type="ipemail" id="ipemail" name="ipemail" value="">
 								</li>
 								<li>
-									<label for="ipphone">Phone <span class="red">*</span></label>
+									<label for="ipphone">Phone <label class="red">*</label></label>
 									<input type="number" id="ipphone" name="ipphone" value="" required>
 								</li>
 								<li>
-									<label for="ipDateOfBirth">Date Of Birth <span class="red">*</span></label>
+									<label for="ipDateOfBirth">Date Of Birth <label class="red">*</label></label>
 									<input type="text" id="ipDateOfBirth" name="ipDateOfBirth" value="" required>
 								</li>
 								<li>
-									<label for="translatorRequired">Translator Required <span class="red">*</span></label>
+									<label for="translatorRequired">Translator Required <label class="red">*</label></label>
 									<input type="radio" class="translatorRequired" name="translatorRequired" value="Yes" required> Yes  &nbsp;&nbsp;&nbsp;
 									<input type="radio" class="translatorRequired" name="translatorRequired" value="No" required> No
 								</li>
 								<li id="translatorLanguageWrapper">
-									<label for="translatorLanguage">Translator Language <span class="red">*</span></label>
+									<label for="translatorLanguage">Translator Language <label class="red">*</label></label>
 									<select id="translatorLanguage" name="translatorLanguage">
 										<option value=""> Please Select </option>
 										<option value="Afrikaans">Afrikaans</option>
@@ -351,7 +357,7 @@ else{ ?>
 										<option value="Slovak">Slovak</option>
 										<option value="Slovenian">Slovenian</option>
 										<option value="Somali">Somali</option>
-										<option value="Spanish">Spanish</option>
+										<option value="labelish">labelish</option>
 										<option value="Swedish">Swedish</option>
 										<option value="Swahili">Swahili</option>
 										<option value="Tagalog-Filipino">Tagalog-Filipino</option>
@@ -371,16 +377,16 @@ else{ ?>
 									</select>
 								</li>
 								<li>
-									<label for="currentlyEmployed">Currently Employed <span class="red">*</span></label>
+									<label for="currentlyEmployed">Currently Employed <label class="red">*</label></label>
 									<input type="radio" class="currentlyEmployed" name="currentlyEmployed" value="Yes" required> Yes  &nbsp;&nbsp;&nbsp;
 									<input type="radio" class="currentlyEmployed" name="currentlyEmployed" value="No" required> No
 								</li>
 								<li>
-									<label for="preferredDate">Preferred Date <span class="red">*</span></label>
+									<label for="preferredDate">Preferred Date <label class="red">*</label></label>
 									<input type="text" id="preferredDate" name="preferredDate" class="datepicker" value="" required>
 								</li>
 								<li>
-									<label for="preferredTime">Preferred Time <span class="red">*</span></label>
+									<label for="preferredTime">Preferred Time <label class="red">*</label></label>
 									<select id="preferredTime" name="preferredTime" required>
 										<option value=""> Please Select </option>
 										<option value="AM">AM</option>
@@ -389,7 +395,7 @@ else{ ?>
 									</select>
 								</li>
 								<li>
-									<label for="reportRequiredNoLaterThan">Report Required No Later Than <span class="red">*</span></label>
+									<label for="reportRequiredNoLaterThan">Report Required No Later Than <label class="red">*</label></label>
 									<input type="text" id="reportRequiredNoLaterThan" name="reportRequiredNoLaterThan" class="datepicker"  value="" required>
 								</li>
 
@@ -437,33 +443,6 @@ else{ ?>
 			buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
 			buttonText: "Select Date",
 			yearRange: "-90:+0"
-		});
-
-
-		$("#assessCategory").on("change", function(){
-			var assessCategoryVal = $(this).val();
-			var htmlOptions = '<option value=""> Please Select </option>';
-			$("#assess").prop("required", false);
-			if(assessCategoryVal == "FUNCTION & CAPACITY"){
-				$("#assess").prop("required", true);
-				htmlOptions  = '<option value="Activities of Daily Living (ADL)">Activities of Daily Living (ADL)</option>';
-				htmlOptions += '<option value="Fitness for Work (FFW)">Fitness for Work (FFW)</option>';
-				htmlOptions += '<option value="Care, Domestic & Personal (CARE)">Care, Domestic & Personal (CARE)</option>';
-				htmlOptions += '<option value="Function Capacity Evaluation (FCE)">Function Capacity Evaluation (FCE)</option>';
-				htmlOptions += '<option value="Earning Capacity (EC)">Earning Capacity (EC)</option>';
-				htmlOptions += '<option value="Labour Market Analysis (LMA)">Labour Market Analysis (LMA)</option>';
-				htmlOptions += '<option value="Employability (VOC+FCE)">Employability (VOC+FCE)</option>';
-				htmlOptions += '<option value="Vocational (VOC)">Vocational (VOC)</option>';
-				htmlOptions += '<option value="File Review (FR)">File Review (FR)</option>';
-				htmlOptions += '<option value="Work Related Activity Program (WRAP)">Work Related Activity Program (WRAP)</option>';
-			}
-			else if(assessCategoryVal == "IMPAIRMENT"){
-				$("#assess").prop("required", true);
-				htmlOptions = '<option value="Whole Person Impairment (WPI) - Psychological">Whole Person Impairment (WPI) - Psychological</option>';
-				htmlOptions += '<option value="Whole Person Impairment (WPI) - Physical">Whole Person Impairment (WPI) - Physical</option>';
-			}
-
-			$("#assess").html(htmlOptions);
 		});
 
 		$("#assessmentPurposeCategory").on("change", function(){
