@@ -12,8 +12,8 @@ if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 	$curlObj= new Mycurl();
 
 	$authToken					= trim($_POST['authToken']);
-	$assessCategory				= trim($_POST['assessCategory']);
-	$assess						= trim(implode(";", $_POST['assess']));
+	$assessCategory				= trim(implode(";", $_POST['impairment']));
+	$assess						= trim(implode(";", $_POST['assess_function_and_capacity']));
 	$assessmentPurposeCategory	= trim($_POST['assessmentPurposeCategory']);
 	$assessmentPurpose			= trim($_POST['assessmentPurpose']);
 	$company					= trim($_POST['company']);
@@ -27,12 +27,13 @@ if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 	$ipemail					= trim($_POST['ipemail']);
 	$ipphone					= trim($_POST['ipphone']);
 	$ipDateOfBirth				= trim($_POST['ipDateOfBirth']);
-	$translatorRequired			= trim($_POST['translatorRequired']);
-	$translatorLanguage			= trim($_POST['translatorLanguage']);
+	$interpreterRequired			= trim($_POST['interpreterRequired']);
+	$interpreterLanguage			= trim($_POST['interpreterLanguage']);
 	$currentlyEmployed			= trim($_POST['currentlyEmployed']);
 	$preferredDate				= trim($_POST['preferredDate']);
 	$preferredTime				= trim($_POST['preferredTime']);
 	$reportRequiredNoLaterThan	= trim($_POST['reportRequiredNoLaterThan']);
+	$description				= trim($_POST['comments']);
 
 	//process Accounts
 	$crmAccountId				= "";
@@ -140,8 +141,8 @@ if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 							<FL val="CONTACTID">'.$contactId.'</FL>
 							<FL val="Assessment Purpose Category"><![CDATA['.$assessmentPurposeCategory.']]></FL>
 							<FL val="Assessment Purpose"><![CDATA['.$assessmentPurpose.']]></FL>
-							<FL val="Assess Category"><![CDATA['.$assessCategory.']]></FL>
-							<FL val="Assess"><![CDATA['.$assess.']]></FL>
+							<FL val="Impairment"><![CDATA['.$assessCategory.']]></FL>
+							<FL val="Assess Function &amp; Capacity"><![CDATA['.$assess.']]></FL>
 							<FL val="Preferred Date">'.$preferredDate.'</FL>
 							<FL val="Preferred Time">'.$preferredTime.'</FL>
 							<FL val="Report Required No Later Than"><![CDATA['.$reportRequiredNoLaterThan.']]></FL>
@@ -151,8 +152,9 @@ if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 							<FL val="Phone">'.$ipphone.'</FL>
 							<FL val="Date Of Birth"><![CDATA['.$ipDateOfBirth.']]></FL>
 							<FL val="Currently Employed"><![CDATA['.$currentlyEmployed.']]></FL>
-							<FL val="Translator Required"><![CDATA['.$translatorRequired.']]></FL>
-							<FL val="Translator Language"><![CDATA['.$translatorLanguage.']]></FL>
+							<FL val="interpreter Required"><![CDATA['.$interpreterRequired.']]></FL>
+							<FL val="interpreter Language"><![CDATA['.$interpreterLanguage.']]></FL>
+							<FL val="Description"><![CDATA['.$description.']]></FL>
 						</row>
 					</Potentials>';
 	//echo $msg .="<hr />dealXmlData = ".htmlspecialchars($dealXmlData)."<hr />";
@@ -160,6 +162,7 @@ if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 	$postRepDeal			= $curlObj->post($apiRequestURLforDeals,array('xmlData'=>$dealXmlData));
 	if($postRepDeal!=''){
 		$practice4 =$xmlObj->parseString($postRepDeal, false);
+		//print_r($practice4);
 		if(isset($practice4['response'][0]['result']['message'])){
 			$potentialId	= $practice4['response'][0]['result']['recorddetail']['FL'][0][0];
 		}
@@ -189,8 +192,8 @@ if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 	$logdata['ipemail'] 						= $ipemail;
 	$logdata['ipphone'] 						= $ipphone;
 	$logdata['ip_date_of_birth'] 				= $ipDateOfBirth;
-	$logdata['translator_required'] 			= $translatorRequired;
-	$logdata['translator_language'] 			= $translatorLanguage;
+	$logdata['interpreter_required'] 			= $interpreterRequired;
+	$logdata['interpreter_language'] 			= $interpreterLanguage;
 	$logdata['currently_employed'] 				= $currentlyEmployed;
 	$logdata['preferred_date'] 					= $preferredDate;
 	$logdata['preferred_time'] 					= $preferredTime;
@@ -218,35 +221,26 @@ else{ ?>
 							<input type="hidden" name="authToken" value="9f8e764bae7327a2c270546260004909">
 							<ul class="oscFList">
 								<li>
-									<h4>Assess Function &amp; Capacity</h4>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Activities of Daily Living (ADL)" />Activities of Daily Living (ADL)</label>
-							<label class="checkbox-wrap"><input type="checkbox" name="function" value="Care, Domestic & Personal (CARE)" />Care, Domestic & Personal (CARE)</label>
-							<label class="checkbox-wrap"><input type="checkbox" name="function" value="Function Capacity Evaluation (FCE)" />Function Capacity Evaluation (FCE)</label>
-			<label class="checkbox-wrap"><input type="checkbox" name="function" value="Earning Capacity (EC)" />Earning Capacity (EC)</label>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Labour Market Analysis (LMA)" />Labour Market Analysis (LMA)</label>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Employability (VOC+FCE)" />Employability (VOC+FCE)</label>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Vocational (VOC)" />Vocational (VOC)</label>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="File Review (FR)" />File Review (FR)</label>
-									<label class="checkbox-wrap"><input type="checkbox" name="function" value="Work Related Activity Program (WRAP)" />Work Related Activity Program (WRAP)</label>
+										<h4>Expert Report</h4>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExOP1"/>Occupational Physician<span class="byline">Treatment, Job Capacity &amp; WPI</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExOT1"/>Occupational Therapy<span class="byline">Personal Domestic Care Capacities</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExOT2"/>Occupational Therapy<span class="byline">Activity of Daily Living</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExOT3"/>Occupational Therapy <span class="or">or</span> Physiotherapy<span class="byline">Functional Capacity Evaluation</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExRC1"/>Rehab Counsellor<span class="byline">Vocational Assessment</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExRC2"/>Rehab Counsellor<span class="byline">Earning Capacity</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExRC3"/>Rehab Counsellor<span class="byline">Labour Market</span></label>
 								</li>
 								<li>
-										<h4>Impairment</h4>
-										<label class="checkbox-wrap"><input type="checkbox" name="impairment" value="Whole Person Impairment (WPI) - Psychological"/>Whole Person Impairment (WPI) - Psychological</label>
-										<label class="checkbox-wrap"><input type="checkbox" name="impairment" value="Whole Person Impairment (WPI) - Physical"/>Whole Person Impairment (WPI) - Physical</label>
+										<h4>Joint Expert Report</h4>
+										<label class="checkbox-wrap"><input type="checkbox" name="joint[]" value="OPOT1"/>Occupational Physician &amp; Occupational Therapy<span class="byline">Treatment, Job Capacity, WPI  &amp; Care Capacity</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="joint[]" value="OT1"/>Occupational Therapy &amp; Rehab Counsellor<span class="byline">Employability</span></label>
 								</li>
 								<li>
-									<label for="assessmentPurposeCategory">Assessment Purpose Category</label>
+									<h4>Assessment Purpose</h4>
 									<select id="assessmentPurposeCategory" name="assessmentPurposeCategory">
 										<option value=""> Please Select </option>
-										<option value="IN LITIGATED CLAIM">IN LITIGATED CLAIM</option>
-										<option value="FOR REHAB CASE MANAGEMENT">FOR REHAB CASE MANAGEMENT</option>
-										<option value="FOR EMPLOYER-LEAD & ORGANISATIONAL HEALTH">FOR EMPLOYER-LEAD & ORGANISATIONAL HEALTH</option>
-									</select>
-								</li>
-								<li>
-									<label for="assessmentPurpose">Assessment Purpose</label>
-									<select id="assessmentPurpose" name="assessmentPurpose">
-										<option value=""> Please Select </option>
+										<option value="LITIGATED CLAIM">LITIGATED CLAIM</option>
+										<option value="REHAB CASE MANAGEMENT">REHAB CASE MANAGEMENT</option>
 									</select>
 								</li>
 								<li><h4>Your Details</h4></li>
@@ -272,6 +266,10 @@ else{ ?>
 								</li>
 								<li><h4>Your Client - Injured Person Details</h4></li>
 								<li>
+									<label for="title">Title <label class="red">*</label></label>
+									<input type="text" id="title" name="title" value="" required>
+								</li>
+								<li>
 									<label for="ipfirstName">First Name <label class="red">*</label></label>
 									<input type="text" id="ipfirstName" name="ipfirstName" value="" required>
 								</li>
@@ -292,13 +290,13 @@ else{ ?>
 									<input type="text" id="ipDateOfBirth" name="ipDateOfBirth" value="" required>
 								</li>
 								<li>
-									<label for="translatorRequired">Translator Required <label class="red">*</label></label>
-									<input type="radio" class="translatorRequired" name="translatorRequired" value="Yes" required> Yes  &nbsp;&nbsp;&nbsp;
-									<input type="radio" class="translatorRequired" name="translatorRequired" value="No" required> No
+									<label for="interpreterRequired">Interpreter Required <label class="red">*</label></label>
+									<input type="radio" class="interpreterRequired" name="interpreterRequired" value="Yes" required> Yes  &nbsp;&nbsp;&nbsp;
+									<input type="radio" class="interpreterRequired" name="interpreterRequired" value="No" required> No
 								</li>
-								<li id="translatorLanguageWrapper">
-									<label for="translatorLanguage">Translator Language <label class="red">*</label></label>
-									<select id="translatorLanguage" name="translatorLanguage">
+								<li id="interpreterLanguageWrapper">
+									<label for="interpreterLanguage">Interpreter Language <label class="red">*</label></label>
+									<select id="interpreterLanguage" name="interpreterLanguage">
 										<option value=""> Please Select </option>
 										<option value="Afrikaans">Afrikaans</option>
 										<option value="Albanian">Albanian</option>
@@ -482,15 +480,15 @@ else{ ?>
 			$("#assessmentPurpose").html(htmlOptions);
 		});
 
-		$(".translatorRequired").on("click", function(){
+		$(".interpreterRequired").on("click", function(){
 			var checkedVal = $(this).val();
 			if(checkedVal == "Yes"){
-				$("#translatorLanguage").prop("required", true);
-				$("#translatorLanguageWrapper").slideDown("slow");
+				$("#interpreterLanguage").prop("required", true);
+				$("#interpreterLanguageWrapper").slideDown("slow");
 			}else if(checkedVal == "No"){
-				$("#translatorLanguage").val("");
-				$("#translatorLanguage").prop("required", false);
-				$("#translatorLanguageWrapper").slideUp("slow");
+				$("#interpreterLanguage").val("");
+				$("#interpreterLanguage").prop("required", false);
+				$("#interpreterLanguageWrapper").slideUp("slow");
 			}
 		});
 

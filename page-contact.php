@@ -5,7 +5,7 @@
     <p>
       Use the form below, or the contact details below to contact us. If you need to submit a booking request you can do so <a href="/booking">here.</a> <br />
       <span class="bold">Address: <br /></span>15 Albion St<br />Harris Park<br />NSW 2150<br />
-      <span class="bold">Email:</span> <br /><a href="mailto:assessments@assessmenthub.com.au">assessments@assessmenthub.com.au</a>
+      <span class="bold">Email:</span> <br /><a href="mailto:assessment@assessmenthub.com.au">assessment@assessmenthub.com.au</a>
     </p>
 
     <form class="grey-form contact-form" id="contact" method="post" action>

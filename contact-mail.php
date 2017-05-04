@@ -25,7 +25,7 @@ $template .='<a style="color: #ffffff!important; text-decoration: none!important
   // echo $template;
 
   // send email
-  $to = 'assessments@assessmenthub.com.au';
+  $to = 'assessment@assessmenthub.com.au';
   // $to = 'contact@isaacmartin.co';
 
   $subject = 'Contact Request From Website';
