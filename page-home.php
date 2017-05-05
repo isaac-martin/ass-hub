@@ -1,4 +1,5 @@
 <?php get_header(); ?>
+<?php include 'inc/book-bar.php';?>
 
 <main class="site-main">
 <section class="intro container">

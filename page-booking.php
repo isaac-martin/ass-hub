@@ -211,7 +211,6 @@ if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 	echo '<script>window.location.href="'.$url.'"</script>';
 }
 else{ ?>
-	<div id="wrap-content" class="wrap-content">
 		<div id="content" class="site-content">
 			<section id="primary" class="content-area">
 				<main id="main" class="site-main">
@@ -409,7 +408,6 @@ else{ ?>
 				</main>
 			</section>
 		</div>
-	</div>
 	<?php
 } ?>
 <div style="clear: both"></div>
