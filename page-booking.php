@@ -12,9 +12,11 @@ if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 	$curlObj= new Mycurl();
 
 	$authToken					= trim($_POST['authToken']);
-	$assessCategory				= trim(implode(";", $_POST['impairment']));
-	$assess						= trim(implode(";", $_POST['assess_function_and_capacity']));
-	$assessmentPurposeCategory	= trim($_POST['assessmentPurposeCategory']);
+	//$assessCategory				= trim(implode(";", $_POST['impairment']));
+	//$assess						= trim(implode(";", $_POST['assess_function_and_capacity']));
+	$expert						= trim(implode(";", $_POST['expert']));
+	$joint						= trim(implode(";", $_POST['joint']));
+	//$assessmentPurposeCategory	= trim($_POST['assessmentPurposeCategory']);
 	$assessmentPurpose			= trim($_POST['assessmentPurpose']);
 	$company					= trim($_POST['company']);
 	$firstName					= trim($_POST['firstName']);
@@ -22,6 +24,7 @@ if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 	$email						= trim($_POST['email']);
 	$phone						= trim($_POST['phone']);
 	//Ijured Person details
+	$title						= trim($_POST['title']);
 	$ipfirstName				= trim($_POST['ipfirstName']);
 	$iplastName					= trim($_POST['iplastName']);
 	$ipemail					= trim($_POST['ipemail']);
@@ -129,35 +132,38 @@ if(isset($_POST['authToken']) && $_POST['authToken'] !=""){
 	}
 
 	//Process Deals EOF
-	$potentialFailReason = "";
-	$PotentialName 		= $iplastName.", ".$ipfirstName." - ".$company." ".time();
+	$potentialFailReason= "";
+	$PotentialName		= $iplastName.", ".$ipfirstName." - ".$company." ".time();
+
+	$dealXmlFields		= '<FL val="Potential Name"><![CDATA['.$PotentialName.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Closing Date">'.date("Y-m-d", time()+30*24*60*60).'</FL>';
+	$dealXmlFields	   .= '<FL val="Stage">Qualification</FL>';
+	$dealXmlFields	   .= '<FL val="ACCOUNTID">'.$crmAccountId.'</FL>';
+	$dealXmlFields	   .= '<FL val="CONTACTID">'.$contactId.'</FL>';
+	$dealXmlFields	   .= '<FL val="Expert Report"><![CDATA['.$expert.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Joint Expert Report"><![CDATA['.$joint.']]></FL>';
+	//$dealXmlFields	   .= '<FL val="Assessment Purpose Category"><![CDATA['.$assessmentPurposeCategory.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Assessment Purpose"><![CDATA['.$assessmentPurpose.']]></FL>';
+	//$dealXmlFields	   .= '<FL val="Impairment"><![CDATA['.$assessCategory.']]></FL>';
+	//$dealXmlFields	   .= '<FL val="Assess Function &amp; Capacity"><![CDATA['.$assess.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Preferred Date">'.$preferredDate.'</FL>';
+	$dealXmlFields	   .= '<FL val="Preferred Time">'.$preferredTime.'</FL>';
+	$dealXmlFields	   .= '<FL val="Report Required No Later Than"><![CDATA['.$reportRequiredNoLaterThan.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Title"><![CDATA['.$title.']]></FL>';
+	$dealXmlFields	   .= '<FL val="First Name"><![CDATA['.$ipfirstName.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Last Name"><![CDATA['.$iplastName.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Email"><![CDATA['.$ipemail.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Phone">'.$ipphone.'</FL>';
+	$dealXmlFields	   .= '<FL val="Date Of Birth"><![CDATA['.$ipDateOfBirth.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Currently Employed"><![CDATA['.$currentlyEmployed.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Translator Required"><![CDATA['.$interpreterRequired.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Translator Language"><![CDATA['.$interpreterLanguage.']]></FL>';
+	$dealXmlFields	   .= '<FL val="Description"><![CDATA['.$description.']]></FL>';
+
 	$dealXmlData = '<Potentials>
-						<row no="1">
-							<FL val="Potential Name"><![CDATA['.$PotentialName.']]></FL>
-							<FL val="Closing Date">'.date("Y-m-d", time()+30*24*60*60).'</FL>
-							<FL val="Stage">Qualification</FL>
-							<FL val="Lead Source">Assessmenthub Website</FL>
-							<FL val="ACCOUNTID">'.$crmAccountId.'</FL>
-							<FL val="CONTACTID">'.$contactId.'</FL>
-							<FL val="Assessment Purpose Category"><![CDATA['.$assessmentPurposeCategory.']]></FL>
-							<FL val="Assessment Purpose"><![CDATA['.$assessmentPurpose.']]></FL>
-							<FL val="Impairment"><![CDATA['.$assessCategory.']]></FL>
-							<FL val="Assess Function &amp; Capacity"><![CDATA['.$assess.']]></FL>
-							<FL val="Preferred Date">'.$preferredDate.'</FL>
-							<FL val="Preferred Time">'.$preferredTime.'</FL>
-							<FL val="Report Required No Later Than"><![CDATA['.$reportRequiredNoLaterThan.']]></FL>
-							<FL val="First Name"><![CDATA['.$ipfirstName.']]></FL>
-							<FL val="Last Name"><![CDATA['.$iplastName.']]></FL>
-							<FL val="Email"><![CDATA['.$ipemail.']]></FL>
-							<FL val="Phone">'.$ipphone.'</FL>
-							<FL val="Date Of Birth"><![CDATA['.$ipDateOfBirth.']]></FL>
-							<FL val="Currently Employed"><![CDATA['.$currentlyEmployed.']]></FL>
-							<FL val="interpreter Required"><![CDATA['.$interpreterRequired.']]></FL>
-							<FL val="interpreter Language"><![CDATA['.$interpreterLanguage.']]></FL>
-							<FL val="Description"><![CDATA['.$description.']]></FL>
-						</row>
+						<row no="1">'.$dealXmlFields.'</row>
 					</Potentials>';
-	//echo $msg .="<hr />dealXmlData = ".htmlspecialchars($dealXmlData)."<hr />";
+	//echo $msg .="<hr />dealXmlData = ".htmlspecialchars($dealXmlData)."<hr />";exit;
 	$apiRequestURLforDeals	= 'https://crm.zoho.com/crm/private/xml/Potentials/insertRecords?authtoken='.$authToken.'&scope=crmapi&newFormat=1&duplicateCheck=2';
 	$postRepDeal			= $curlObj->post($apiRequestURLforDeals,array('xmlData'=>$dealXmlData));
 	if($postRepDeal!=''){
@@ -221,22 +227,22 @@ else{ ?>
 							<ul class="oscFList">
 								<li>
 										<h4>Expert Report</h4>
-										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExOP1"/>Occupational Physician<span class="byline">Treatment, Job Capacity &amp; WPI</span></label>
-										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExOT1"/>Occupational Therapy<span class="byline">Personal Domestic Care Capacities</span></label>
-										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExOT2"/>Occupational Therapy<span class="byline">Activity of Daily Living</span></label>
-										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExOT3"/>Occupational Therapy <span class="or">or</span> Physiotherapy<span class="byline">Functional Capacity Evaluation</span></label>
-										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExRC1"/>Rehab Counsellor<span class="byline">Vocational Assessment</span></label>
-										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExRC2"/>Rehab Counsellor<span class="byline">Earning Capacity</span></label>
-										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="ExRC3"/>Rehab Counsellor<span class="byline">Labour Market</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="Occupational Physician (Treatment, Job Capacity & WPI)"/>Occupational Physician<span class="byline">Treatment, Job Capacity &amp; WPI</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="Occupational Therapy (Personal Domestic Care Capacities)"/>Occupational Therapy<span class="byline">Personal Domestic Care Capacities</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="Occupational Therapy (Activity of Daily Living)"/>Occupational Therapy<span class="byline">Activity of Daily Living</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="Occupational Therapy or Physiotherapy (Functional Capacity Evaluation)"/>Occupational Therapy <span class="or">or</span> Physiotherapy<span class="byline">Functional Capacity Evaluation</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="Rehab Counsellor (Vocational Assessment)"/>Rehab Counsellor<span class="byline">Vocational Assessment</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="Rehab Counsellor (Earning Capacity)"/>Rehab Counsellor<span class="byline">Earning Capacity</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="expert[]" value="Rehab Counsellor (Labour Market)"/>Rehab Counsellor<span class="byline">Labour Market</span></label>
 								</li>
 								<li>
 										<h4>Joint Expert Report</h4>
-										<label class="checkbox-wrap"><input type="checkbox" name="joint[]" value="OPOT1"/>Occupational Physician &amp; Occupational Therapy<span class="byline">Treatment, Job Capacity, WPI  &amp; Care Capacity</span></label>
-										<label class="checkbox-wrap"><input type="checkbox" name="joint[]" value="OT1"/>Occupational Therapy &amp; Rehab Counsellor<span class="byline">Employability</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="joint[]" value="Occupational Physician & Occupational Therapy (Treatment, Job Capacity, WPI & Care Capacity)"/>Occupational Physician &amp; Occupational Therapy<span class="byline">Treatment, Job Capacity, WPI  &amp; Care Capacity</span></label>
+										<label class="checkbox-wrap"><input type="checkbox" name="joint[]" value="Occupational Therapy & Rehab Counsellor (Employability)"/>Occupational Therapy &amp; Rehab Counsellor<span class="byline">Employability</span></label>
 								</li>
 								<li>
 									<h4>Assessment Purpose</h4>
-									<select id="assessmentPurposeCategory" name="assessmentPurposeCategory">
+									<select id="assessmentPurpose" name="assessmentPurpose">
 										<option value=""> Please Select </option>
 										<option value="LITIGATED CLAIM">LITIGATED CLAIM</option>
 										<option value="REHAB CASE MANAGEMENT">REHAB CASE MANAGEMENT</option>
